@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "$NODE_PACKAGE_MANAGER run build; $NODE_PACKAGE_MANAGER run serve",
-    "serve": "light-server -s public -p 8888 -w \"**/*.csv, **/*.ejs, build.js # $NODE_PACKAGE_MANAGER run build # reload\" -w \"*.html, **/*.js # # reload\" -w \"**/*.css # # reloadcss\"",
+    "serve": "light-server -s docs -p 8888 -w \"**/*.csv, **/*.ejs, build.js # $NODE_PACKAGE_MANAGER run build # reload\" -w \"*.html, **/*.js # # reload\" -w \"**/*.css # # reloadcss\"",
     "build": "node build.js",
     "logos": "node logos.js"
   },

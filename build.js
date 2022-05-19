@@ -60,4 +60,4 @@ const logos = await getLogosFile('./logos.json');
 const locals = { senate, house, logos };
 const output = await renderFile('./cth-2022.ejs', locals);
 // const output = renderFile('./cth-2022.pug', locals);
-await fs.writeFile('public/index.html', output);
+await fs.writeFile('docs/index.html', output);

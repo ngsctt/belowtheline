@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+    <title>Personal HTV Generator (Commonwealth 2022)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="btl.css">
+  </head>
+  <body>
+    <% const states = new Set() %>
+    <select name="state" id="state">
+      <option value="" selected disabled hidden>select state</option>
+      <%_
+        for (const s of senate.keys()) { 
+          states.add(s);
+      -%>
+      <option><%- s %></option>
+      <%_ } -%>
+    </select>
+    <select name="division" id="division" disabled>
+      <option value="" selected>select division</option>
+      <%_
+        for (const [d, {state}] of house.entries()) {
+          states.add(state);
+      -%>
+      <option data-state="<%- state %>" value="<%- d.toUpperCase() %>"><%- d %></option>
+      <%_ } -%>
+    </select>
+    <% for (const [state, columns] of senate.entries()) { %>
+    <div class="ballot-container">
+      <div class="ballot senate-ballot" id="<%- state %>" data-state="<%- state %>">
+        <header>
+          <h1>Personal HTV</h1>
+          <h2>Senate 2022: State of <%= state %></h2>
+        </header>
+        <div class="columns">
+        <%_
+          let index = 0;
+          for (const [label, column] of columns.entries()) {
+        -%>
+          <div class="column" data-column="<%- label %>" data-column-position="<%- index++ %>">
+            <div class="above<%= label === 'UG' && column.name === '' ? ' ungrouped' : '' %>">
+              <span class="label"><%- label %></span>
+              <div class="logos">
+                <%_ 
+                  const partyNames = new Set();
+                  column.candidates.forEach(candidate => partyNames.add(candidate.partyBallotName));
+                  partyNames.forEach(name => {
+                    if (logos[name]) {
+                -%>
+                <img src="<%- logos[name] %>">
+                <%_
+                    }
+                  });
+                -%>
+              </div>
+              <div class="box">
+                <input type="number" class="above" min="1" step="1" id="<%= `${state}-${label}` %>">
+              </div>
+              <span class="party"><%= column.name || '' %></span>
+            </div>
+            <div class="line"></div>
+            <div class="below">
+              <span class="party"><%= label === 'UG' && column.name === '' ? 'ungrouped' : column.name || '' %></span>
+              <div class="candidates">
+              <% column.candidates.forEach(candidate => { %>
+                <div <%- [
+                  `id="${candidate.state}-${candidate.column}-${candidate.ballotPosition}"`,
+                  `data-state="${candidate.state}"`,
+                  `data-column="${candidate.column}"`,
+                  `data-group="${candidate.groupName}"`,
+                  `data-position="${candidate.ballotPosition}"`
+                ].join(' ') %> class="candidate">
+                  <span class="box">
+                    <input type="number" class="below" min="1" step="1" id="<%= `${state}-${label}-${candidate.ballotPosition}` %>">
+                  </span>
+                  <div class="details">
+                    <span class="surname"><%- candidate.surname %></span>
+                    <span class="given-names"><%- candidate.ballotGivenName %></span>
+                    <span class="party"><%- candidate.partyBallotName %></span>
+                  </div>
+                </div>
+              <% }) %>
+              </div>
+            </div>
+          </div>
+        <% } %>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <% for (const [division, {state, candidates}] of house.entries()) { %>
+    <div class="ballot house-ballot" id="<%- `${division.toUpperCase()}` %>" data-state="<%- state %>" data-division="<%- division.toUpperCase() %>">
+      <header>
+        <h1>Personal HTV</h2>
+        <h2>House of Representatives 2022</h2>
+        <h2><%= state %>, Electoral Division of <%= division %></h2>
+      </header>
+      <div class="candidates">
+      <%_ candidates.forEach(candidate => { -%>
+        <div <%- [
+          `id="${candidate.division.toUpperCase()}-${candidate.ballotPosition}"`,
+          `data-state="${candidate.state}"`,
+          `data-division="${candidate.division}"`,
+          `data-position="${candidate.ballotPosition}"`
+        ].join(' ') %> class="candidate">
+          <div class="logo">
+            <%_ if (candidate.partyBallotName && logos[candidate.partyBallotName]) { -%>
+              <img src="<%- logos[candidate.partyBallotName] %>">
+            <%_ } -%>
+          </div>
+          <div class="box">
+            <input type="number" class="house" min="1" step="1" id="<%= `${division}-${candidate.ballotPosition}` %>">
+          </div>
+          <div class="details">
+            <span class="name">
+              <span class="surname"><%- candidate.surname %></span><% if (
+                candidate.surname &&
+                candidate.surname !== '' &&
+                candidate.ballotGivenName &&
+                candidate.ballotGivenName !== ''
+              ) { %>,<% } %>
+              <span class="given-names"><%- candidate.ballotGivenName %></span>
+            </span>
+            <span class="party"><%- candidate.partyBallotName %></span>
+          </div>
+        </div>
+      <%_ }) -%>
+      </div>
+    </div>
+    <% } %>
+    <style id="dynamic-style-state"></style>
+    <style id="dynamic-style-division"></style>
+    <script src="./btl.js" type="module"></script>
+  </body>
+</html>

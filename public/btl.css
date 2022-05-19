@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&text=1234567890&display=swap');
+
+:root {
+  font-family: 'Arial Narrow', sans-serif;
+  /* font-size: 10pt; */
+  --box-length: 10mm;
+  --shadow-length: 1mm;
+  --shadow-colour: hsla(0,0%,0%,0.5);
+}
+
+body {
+  padding: 1rem;
+}
+
+/* .ballot-container {
+  overflow-x: scroll;
+} */
+
+.senate-ballot {
+  border: thin solid black;
+  box-shadow: var(--shadow-length) var(--shadow-length) 0 0 var(--shadow-colour);
+  /* width: max-content; */
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.house-ballot {
+  font-family: sans-serif;
+  border: thin solid black;
+  background-color: palegreen;
+  box-shadow: var(--shadow-length) var(--shadow-length) 0 0 var(--shadow-colour);
+  max-width: 25rem;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.columns {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10rem 0;
+  align-items: stretch;
+  /* width: max-content; */
+  overflow-x: scroll;
+  scrollbar-gutter: stable;
+}
+
+/* .columns::-webkit-scrollbar {
+  visibility: visible;
+  background-color: red;
+  border-radius: 10px;
+  width: 20px;
+}
+
+.columns::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+.columns::-webkit-scrollbar-thumb{
+  background-color: blue;
+  border-radius: 10px;
+  border: 5px solid black;
+} */
+
+.column {
+  display: grid;
+  width: 15em;
+  grid-template-rows: auto auto 1fr;
+  gap: .5rem;
+}
+
+.above {
+  display: grid;
+  gap: .5rem;
+  grid-template-rows: 1fr auto auto auto;
+}
+
+.above .logos {
+  /* display: grid; */
+  /* grid-template-rows: 10mm 10mm; */
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 1mm;
+  height: 21mm;
+}
+
+.label {
+  margin-bottom: 1em;
+}
+
+.line {
+  height: .5rem;
+  background-color: black;
+}
+
+.above, .below {
+  border-left: thin solid black;
+  padding: 0 .5rem;
+}
+
+.above > .party,
+.below > .party {
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  height: 5em;
+}
+
+.box {
+  width: var(--box-length);
+  height: var(--box-length);
+  border: thin solid black;
+}
+
+.box input {
+  display: content;
+  /* display: block; */
+  background: none;
+  text-align: center;
+  appearance: none;
+  -moz-appearance:textfield;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-size: 2rem;
+  line-height: 0;
+  font-family: 'Caveat', cursive;
+  vertical-align: middle;
+}
+
+.box input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.candidates {
+  display: grid;
+  grid-template-rows: repeat(6, var(--box-length));
+  gap: 1.5rem;
+}
+
+.house-ballot .candidates {
+  gap: 1em;
+}
+
+.candidate {
+  display: grid;
+  gap: .5em;
+}
+
+.senate-ballot .candidate {
+  grid-template-columns: auto 1fr;
+}
+
+.house-ballot .candidate {
+  grid-template-columns: 10mm auto 1fr;
+}
+
+.logo img, .logos img {
+  width: 10mm;
+  height: 10mm;
+}
+
+.logo {
+  align-self: center;
+  justify-self: center;
+}
+
+.candidate .details {
+  display: grid;
+  grid-auto-flow: row;
+  align-content: start;
+  /* height: var(--box-length); */
+}
+
+.candidate .details .party {
+  font-size: .6em;
+  text-transform: uppercase;
+}
+
+.senate-ballot .surname {
+  font-weight: bold;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h1, h2 {
+  text-align: center;
+  margin: 0;
+}
+
+header {
+  margin-bottom: 1.5rem;
+}

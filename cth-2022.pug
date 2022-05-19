@@ -1,0 +1,37 @@
+doctype
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Personal HTV Generator (Commonwealth 2022)
+  body
+    - console.log(senate.entries())
+    each (state, columns) in senate.entries()
+    //- each state, columns in Object.entries(senate)
+      .senate-ballot(id=state)
+        each column, label in columns.entries
+          .column(data-column=label, data-column-position=index)
+            .above
+              span.label
+              .logos
+              .box
+                input.above(type='number', min=1, step=1)
+              span.party
+            .line
+            .below
+              span.party
+              .candidates
+                each candidate in column
+                  .candidate(
+                    id=`${candidate['state']}-${candidate['column']}-${candidate['ballotPosition']}`,
+                    data-state=`${candidate['state']}`,
+                    data-column=`${candidate['column']}`,
+                    data-group=`${candidate['groupName']}`,
+                    data-position=`${candidate['ballotPosition']}`
+                  )
+                  span.box
+                  .details
+                    span.surname= candidate['surname']
+                    span.given-names= candidate['ballotGivenName']
+                    span.party= candidate['partyBallotName']
+    
+    script(src="" async defer)

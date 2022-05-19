@@ -1,0 +1,38 @@
+{
+  "name": "@ngsctt/belowtheline",
+  "version": "0.1.0",
+  "description": "Personal How-To-Vote generator",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "test": "$NODE_PACKAGE_MANAGER run build; $NODE_PACKAGE_MANAGER run serve",
+    "serve": "light-server -s public -p 8888 -w \"**/*.csv, **/*.ejs, build.js # $NODE_PACKAGE_MANAGER run build # reload\" -w \"*.html, **/*.js # # reload\" -w \"**/*.css # # reloadcss\"",
+    "build": "node build.js",
+    "logos": "node logos.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngsctt/belowtheline.git"
+  },
+  "author": "Nathan Scott <dev@ngscott.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ngsctt/belowtheline/issues"
+  },
+  "homepage": "https://github.com/ngsctt/belowtheline#readme",
+  "devDependencies": {
+    "@types/ejs": "^3.1.1",
+    "@types/node": "^17.0.34",
+    "@types/papaparse": "^5.3.2",
+    "@types/pug": "^2.0.6",
+    "@types/sharp": "^0.30.2",
+    "ejs": "^3.1.8",
+    "jimp": "^0.16.1",
+    "light-server": "^2.9.1",
+    "papaparse": "^5.3.2",
+    "sharp": "^0.30.4"
+  },
+  "dependencies": {
+    "pug": "^3.0.2"
+  }
+}

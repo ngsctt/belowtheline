@@ -132,8 +132,8 @@ function selectDivision (division) {
 }
 
 function updateVisible () {
-  dynamicStyleState.textContent = selections.state ? `.ballot[data-state]:not([data-state=${selections.state}]) { display: none; }` : `[data-state] { display: none; }`;
-  dynamicStyleDivision.textContent = selections.division ? `.ballot[data-division]:not([data-division=${selections.division}]) { display: none; }` : `[data-division] { display: none; }`;
+  dynamicStyleState.textContent = selections.state ? `:where(.ballot, option)[data-state]:not([data-state=${selections.state}]) { display: none; }` : `[data-state] { display: none; }`;
+  dynamicStyleDivision.textContent = selections.division ? `:where(.ballot, option)[data-division]:not([data-division=${selections.division}]) { display: none; }` : `[data-division] { display: none; }`;
 }
 
 function exportPermalink () {

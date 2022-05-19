@@ -146,8 +146,8 @@ function exportPermalink () {
 }
 
 window.addEventListener('load', initialise);
-stateSelect.addEventListener('change', selectState);
-divisionSelect.addEventListener('change', selectDivision);
+stateSelect.addEventListener('change', event => selectState());
+divisionSelect.addEventListener('change', event => selectDivision());
 
 window.retrievePreferences = retrievePreferences;
 window.renderPreferences = renderPreferences;
